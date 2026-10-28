@@ -118,3 +118,5 @@ export async function POST(request: Request) {
       { error: "SubLess AI couldn't respond right now. Please try again." },
       { status: 500 }
     );
+  }
+}
