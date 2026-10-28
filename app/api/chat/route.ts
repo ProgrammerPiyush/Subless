@@ -1,13 +1,16 @@
-
+```tsx
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
 );
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_MESSAGES = 10;
@@ -109,7 +112,9 @@ Keep responses clear, concise, and conversational.
     });
 
     return NextResponse.json({
-      reply: response.output_text || "I couldn't generate a reply. Please try again.",
+      reply:
+        response.output_text ||
+        "I couldn't generate a reply. Please try again.",
     });
   } catch (error) {
     console.error(
@@ -123,3 +128,4 @@ Keep responses clear, concise, and conversational.
     );
   }
 }
+```
